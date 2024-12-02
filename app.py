@@ -10,11 +10,11 @@ app = Flask(__name__)
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        text = request.form["text"]
-        shift = int(request.form["shift"])
+        message = request.form["message"]
+        offset = int(request.form["shift"])
 
         try:
-            result = caesar(text, shift)
+            result = caesar(message, offset)
             return render_template("index.html", result=result)
 
         except ValueError as e:

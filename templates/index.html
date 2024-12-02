@@ -4,28 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caesar Cipher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <h1>Caesar Cipher</h1>
         <form method="POST">
-            <label for="text">Enter Message:</label>
-            <textarea name="text" required></textarea>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="input-message" class="form-label">Enter Message:</label>
+                    <textarea class="form-control" name="message" rows="4" required></textarea>
+                </div>
+            </div>
 
-            <label for="shift">Shift Value (0-25):</label>
-            <input type="number" name="shift" min="0" max="25" required>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="shift" class="form-label">Shift Value (0-25):</label>
+                    <input type="number" name="shift" min="0" max="25" required class="form-control">
+                </div>
+            </div>
 
-            <button type="submit">Encrypt</button>
+            <button type="submit" class="btn btn-primary">Encrypt</button>
         </form>
 
         {% if error %}
-        <div class="error">{{ error }}</div>
+        <div class="alert alert-danger mt-3">{{ error }}</div>
+        {% endif %}
+
+        {% if result %}
+        <div class="mt-3">
+            <h3>Final Message</h3>
+            <textarea name="text" class="form-control" rows="4" readonly>{{ result }}</textarea>
+        </div>
         {% endif %}
     </div>
-    <div>
-        <h3> Final Message</h3>
-        <textarea name="text" readonly>{{ result }}</textarea>
-    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
