@@ -3,6 +3,9 @@ from flask import Flask, render_template, request
 # Importing the Cipher function to encrypt the message
 from caesar_cipher.cipher import caesar
 
+# Importing the validate_shift function from the utils file
+from caesar_cipher.utils import validate_shift
+
 app = Flask(__name__)
 
 
@@ -14,6 +17,9 @@ def index():
         offset = int(request.form["shift"])
 
         try:
+            # Validate the shift value
+            offset = validate_shift(offset)
+
             result = caesar(message, offset)
             return render_template("index.html", result=result)
 
